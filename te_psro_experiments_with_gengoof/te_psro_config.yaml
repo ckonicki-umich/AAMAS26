@@ -1,0 +1,18 @@
+bit_length: 5
+emp_br_list:
+  - 1
+  - 2
+  - 4
+  - 8
+  - 16
+file_ID_index: 0 # between 0 and 45, depending on the total number of games in game_parameters_{...}.npz
+null_infosets: -20000.0
+num_players: 2
+num_psro_iter: 10
+num_rounds_list:
+  - 4
+  - 5
+regret_threshold: 0.0
+sampling_budget: 200 # also consider 100, 500, 1000, depending on game size and compute
+std_dev: 0.0 # noise for TE-EGTA sampling; in this case, we want no noise
+T: 500
