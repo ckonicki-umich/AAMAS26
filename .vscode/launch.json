@@ -1,0 +1,55 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+
+    {
+      "name": "Python Debugger: Run PBE Algorithm Experiment",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/PBE experiments/pbe_algorithm_experiment.py",
+      "console": "integratedTerminal",
+      "args": [
+          "0",
+          "0",
+          "0"
+      ]
+    },
+    {
+      "name": "Python Debugger: Generate GenGoof Games",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/PBE experiments/generate_game_parameters.py",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Python Debugger: Run TE-PSRO Experiment on GenGoof",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/te_psro_experiments_with_gengoof/te_psro_main_gengoof.py",
+      "console": "integratedTerminal",
+      "args": [
+          "0",
+          "0",
+          "0",
+          "ne",
+          "pbe"
+      ]
+    },
+    {
+      "name": "Python Debugger: Run TE-PSRO Experiment on Bargaining Game",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/te_psro_experiments_with_bargaining_game/te_psro_main_bargaining.py",
+      "console": "integratedTerminal",
+      "args": [
+          "0",
+          "0",
+          "ne",
+          "ne"
+      ]
+    },
+  ]
+}

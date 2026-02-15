@@ -69,39 +69,6 @@ def get_true_regret_arr_over_time(directory, threshold=0.0):
 
 	return x, REGRET_arr
 
-def gen_two_plots(res_directory_ne_as_mss, res_directory_pbe_as_mss, num_trials):
-	'''
-	Docstring for gen_two_plots
-	
-	:param res_directory_ne_as_mss: Description
-	:param res_directory_pbe_as_mss: Description
-	'''
-	x_ne_mss, REGRET_NE_MSS_arr = get_true_regret_arr_over_time(res_directory_ne_as_mss)
-	x_pbe_mss, REGRET_PBE_MSS_arr = get_true_regret_arr_over_time(res_directory_pbe_as_mss)
-
-	avg_regret_ne = np.mean(REGRET_NE_MSS_arr, axis=0)
-	std_regret_ne = np.std(REGRET_NE_MSS_arr, axis=0)
-	avg_regret_pbe = np.mean(REGRET_PBE_MSS_arr, axis=0)
-	std_regret_pbe = np.std(REGRET_PBE_MSS_arr, axis=0)
-
-	# ASSUME SAME NUMBER OF DATA SAMPLES IN EACH DIRECTORY
-	CONF_VAL = 1.95 / num_trials**0.5
-
-	plt.figure(1, (6, 4))
-	plt.plot(x_ne_mss, avg_regret_ne, color=COLOR1, label="MSS = NE")
-	plt.fill_between(x_ne_mss, avg_regret_ne - std_regret_ne * CONF_VAL, avg_regret_ne + std_regret_ne * CONF_VAL,
-		alpha=ALPHA, facecolor=COLOR1)
-	plt.plot(x_pbe_mss, avg_regret_pbe, color=COLOR2, label="MSS = PBE")
-	plt.fill_between(x_pbe_mss, avg_regret_pbe - std_regret_pbe * CONF_VAL, avg_regret_pbe + std_regret_pbe * CONF_VAL,
-		alpha=ALPHA, facecolor=COLOR2)
-
-	plt.yticks(weight='bold')
-	plt.xticks(np.arange(0, max(len(x_ne_mss), len(x_pbe_mss)), step=5), weight='bold')
-	plt.xlabel(r"\textbf{TE-PSRO Epochs}")
-	plt.ylabel(r"\textbf{Average Regret of Solution in True Game}")
-	plt.legend(loc='upper right')
-	plt.show()
-
 def gen_six_plots(ne_as_mss_directories, pbe_as_mss_directories, num_trials):
 	'''
 	Docstring for gen_six_plots
@@ -167,22 +134,6 @@ def gen_six_plots(ne_as_mss_directories, pbe_as_mss_directories, num_trials):
 	plt.show()
 
 ########################################################################################################################################################################
-# PLOTTING TRUE GAME REGRET -- 2 plots by MSS = {PBE, NE}, EVAL = NE
-########################################################################################################################################################################
-
-parser = argparse.ArgumentParser()
-parser.add_argument("dir_ne_as_mss")
-parser.add_argument("dir_pbe_as_mss")
-parser.add_argument("num_trials")
-args = parser.parse_args()
-
-res_directory_ne_as_mss = args.dir_ne_as_mss
-res_directory_pbe_as_mss = args.dir_pbe_as_mss
-num_trials = int(args.num_trials)
-
-gen_two_plots(res_directory_ne_as_mss=res_directory_ne_as_mss, res_directory_pbe_as_mss=res_directory_pbe_as_mss, num_trials=num_trials)
-
-########################################################################################################################################################################
 # PLOTTING TRUE GAME REGRET -- 6 plots by MSS = {PBE, NE}, EVAL = NE, INCLUDED_ROUNDS = 1st (0), 1st and 2nd (0, 1), or all (0, 1, 2)
 ########################################################################################################################################################################
 
@@ -194,6 +145,7 @@ parser.add_argument("dir_pbe_as_mss_ir0")
 parser.add_argument("dir_pbe_as_mss_ir1")
 parser.add_argument("dir_pbe_as_mss_ir2")
 parser.add_argument("num_trials")
+args = parser.parse_args()
 
 res_directory_ne_as_mss = (args.dir_ne_as_mss_ir0, args.dir_ne_as_mss_ir1, args.dir_ne_as_mss_ir2)
 res_directory_pbe_as_mss = (args.dir_pbe_as_mss_ir0, args.dir_pbe_as_mss_ir1, args.dir_pbe_as_mss_ir2)
